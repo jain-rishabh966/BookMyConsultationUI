@@ -38,8 +38,9 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
                 console.error({ error: error.message });
                 document.getElementById('msg').innerHTML = '<br /><span style="color:red">Something went wrong.. Please try again later...</span><br />';
             }
+            loadDoctorTimeSlots(new Date());
         })();
-    });
+    }, []);
 
     // Doctor Time Slots by Date
     async function loadDoctorTimeSlots(selectedDate) {
@@ -67,13 +68,43 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
         }
     };
 
-    loadDoctorTimeSlots(new Date());
-
-    function submitAppointment() {
+    async function submitAppointment() {
         try {
+            let userDetails = sessionStorage.getItem('user-details');
+            if (userDetails) {
+                userDetails = JSON.parse(userDetails);
+            } else {
+                alert('Please login');
+                return;
+            };
+            
+            const rawData = await fetch(`/appointments`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "doctorId": id,
+                    "doctorName": doctorName,
+                    "userId": userDetails.id,
+                    "userName": userDetails.firstName + ' ' + userDetails.lastName,
+                    "userEmailId": userDetails.id,
+                    "timeSlot": new Date(timeSlot).toJSON().substr(0, 10),
+                    "appointmentDate": selectedDate,
+                    "createdDate": new Date().toJSON().substr(0, 10),
+                    "symptoms": symptoms,
+                    "priorMedicalHistory": medicalHistory
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${sessionStorage.getItem('access-token')}`
+                }
+            });
 
-        } catch (e) {
-
+            if (rawData.status === 200) {
+                const data = await rawData.json();
+                updateDoctorName((data.firstName || '') + ' ' + (data.lastName || ''));
+            } throw new Error('Slot unavailable exception');
+        } catch (error) {
+            console.log(error);
+            alert('Either the slot is already booked or not available');
         }
     };
 
@@ -104,7 +135,7 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
                 <Select
                     labelId="demo-simple-select-label"
                     value={timeSlot}
-                    onChange={updateTimeSlot}
+                    onChange={e => updateTimeSlot(e.target.value)}
                     style={{
                         width: '45%'
                     }}
