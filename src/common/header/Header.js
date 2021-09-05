@@ -20,8 +20,7 @@ const modalStyle = {
     }
 };
 
-const Header = function () {
-    const [userLoggedIn, setUserLoggedIn] = useState(window.sessionStorage.getItem('access-token') !== null);
+const Header = function ({ userLoggedIn, setUserLoggedIn }) {
     const deactivateModal = () => updateLoginModal(false);
     const activateModal = () => updateLoginModal(true);
 

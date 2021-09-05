@@ -20,6 +20,7 @@
     "react-modal": "^3.12.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "4.0.3",
+    "react-swipeable-views": "^0.14.0",
     "typeface-roboto": "0.0.54",
     "web-vitals": "^1.1.2"
   },
@@ -47,7 +48,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8081",
   "devDependencies": {
     "@types/react": "^17.0.19"
   }

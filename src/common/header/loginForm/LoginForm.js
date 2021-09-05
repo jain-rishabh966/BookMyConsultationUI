@@ -15,7 +15,6 @@ export default function LoginForm({ setUserLoggedIn, updateLoginModal, activePag
                 },
             });
             const data = await rawData.json();
-            console.log(data)
             if (rawData.status === 200) {
                 window.sessionStorage.setItem('user-details', JSON.stringify(data));
                 window.sessionStorage.setItem('access-token', data.accessToken);
@@ -29,6 +28,7 @@ export default function LoginForm({ setUserLoggedIn, updateLoginModal, activePag
             alert('Something went wrong.. Please try again later...');
         }
     }
+
     const [username, updateUsername] = useState('');
     const [password, updatePassword] = useState('');
 

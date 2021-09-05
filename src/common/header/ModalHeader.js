@@ -12,7 +12,7 @@ export default function AuthHeader (props) {
             width: 'auto',
             color: 'white',
         }}>
-            Authentication
+            {props.title || 'Authentication'}
         </div>
     );
 }

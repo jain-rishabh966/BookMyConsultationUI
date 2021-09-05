@@ -1,10 +1,10 @@
 import React from "react";
-import AuthenticationHeader from '../AuthenticationHeader';
+import AuthenticationHeader from '../ModalHeader';
 
 export default function FormHeader({ activeHeader, activePage, setActivePage, setSuccessMessage }) {
     return (
         <nav>
-            <AuthenticationHeader />
+            <AuthenticationHeader title="Authentication" />
             <div id="headerLoginRegister">
                 <div className={activeHeader === 'LOGIN' ? 'active' : ''} onClick={() => { if (activePage !== 'LOGIN') setActivePage('LOGIN') }}>LOGIN</div>
                 <div className={activeHeader === 'REGISTER' ? 'active' : ''} onClick={() => {
