@@ -16,8 +16,8 @@ export default function DoctorDetails({ id, setViewDetailsModalOpen }) {
 
     useEffect(() => {
         (async function updateViewDetailsData() {
-            if (!id)
-                return null;
+            if (!id) return null;
+
             try {
                 const rawData = await fetch(`/doctors/${id}`, {
                     method: 'GET'
@@ -25,7 +25,6 @@ export default function DoctorDetails({ id, setViewDetailsModalOpen }) {
 
                 if (rawData.status === 200) {
                     const data = await rawData.json();
-                    console.log(data);
                     updateName((data.firstName || '') + ' ' + (data.lastName || ''));
                     updateExperience(data.totalYearsOfExp || 0);
                     updateSpeciaity(data.speciality || '');
@@ -42,7 +41,7 @@ export default function DoctorDetails({ id, setViewDetailsModalOpen }) {
                 document.getElementById('msg').innerHTML = '<br /><span style="color:red">Something went wrong.. Please try again later...</span><br />';
             }
         })();
-    });
+    }, [id]);
 
     return (
         <div>

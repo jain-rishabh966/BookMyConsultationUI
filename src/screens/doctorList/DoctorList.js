@@ -115,6 +115,7 @@ export default function DoctorList() {
                                     color="primary"
                                     onClick={_ => {
                                         setBookAppointmentModalOpen(true);
+                                        updateDoctorId(e.id);
                                     }}
                                 >
                                     BOOK APPOINTMENT
@@ -125,7 +126,7 @@ export default function DoctorList() {
                                     style={{ background: 'green' }}
                                     onClick={_ => {
                                         setViewDetailsModalOpen(true);
-                                        updateDoctorId(e.id)
+                                        updateDoctorId(e.id);
                                     }}
                                 >
                                     VIEW DETAILS

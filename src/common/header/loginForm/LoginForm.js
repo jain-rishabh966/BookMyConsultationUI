@@ -66,4 +66,4 @@ export default function LoginForm({ setUserLoggedIn, updateLoginModal, activePag
             </ValidatorForm>
         </div>
     )
-}
+};

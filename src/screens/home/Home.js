@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -55,16 +54,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Home(props) {
     const [userLoggedIn, setUserLoggedIn] = useState(window.sessionStorage.getItem('access-token') !== null);
     const classes = useStyles();
-    const theme = useTheme();
     const [value, setValue] = React.useState(0);
+
+    const [activePage, updateActivePage] = React.useState('DOCTORS');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
+    let activePageHtml = <Appointments {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />;
+    if (activePage === 'DOCTORS') {
+        activePageHtml = <DoctorList {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
+    }
 
     return (
         <div className={classes.root}>
@@ -78,22 +79,12 @@ export default function Home(props) {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="DOCTORS" {...a11yProps(0)} />
-                    <Tab label="APPOINTMENT" {...a11yProps(1)} />
+                    <Tab onClick={() => updateActivePage('DOCTORS')} label="DOCTORS" {...a11yProps(0)} />
+                    <Tab onClick={() => updateActivePage('APPOINTMENT')} label="APPOINTMENT" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-            >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                    <DoctorList {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                    <Appointments {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
-                </TabPanel>
-            </SwipeableViews>
+
+            {activePageHtml}
         </div>
     );
 };
