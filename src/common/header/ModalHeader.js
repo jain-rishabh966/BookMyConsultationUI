@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AuthHeader (props) {
+export default function ModalHeader ({ title }) {
     return (
         <div align="left" style={{
             display: 'flex',
@@ -12,7 +12,7 @@ export default function AuthHeader (props) {
             width: 'auto',
             color: 'white',
         }}>
-            {props.title || 'Authentication'}
+            {title || 'Authentication'}
         </div>
     );
 }

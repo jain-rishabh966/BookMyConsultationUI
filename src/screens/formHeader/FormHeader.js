@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticationHeader from '../ModalHeader';
+import AuthenticationHeader from '../../common/header/ModalHeader';
 
 export default function FormHeader({ activeHeader, activePage, setActivePage, setSuccessMessage }) {
     return (

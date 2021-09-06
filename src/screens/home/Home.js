@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 
 import "./Home.css";
 import DoctorList from "../doctorList/DoctorList";
-import Appointments from "../appointment/Appointments"
+import Appointments from "../appointment/Appointment"
 import Header from "../../common/header/Header";
 
 function TabPanel(props) {

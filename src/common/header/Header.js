@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logo.jpeg';
-import LoginForm from './loginForm/LoginForm';
-import RegisterForm from './registerForm/RegisterForm';
+import LoginForm from '../../screens/login/Login';
+import RegisterForm from '../../screens/register/Register';
 import './Header.css';
 
 const modalStyle = {

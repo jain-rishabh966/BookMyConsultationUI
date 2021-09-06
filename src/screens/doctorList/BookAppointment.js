@@ -40,6 +40,7 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
             }
             loadDoctorTimeSlots(new Date());
         })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Doctor Time Slots by Date
@@ -98,10 +99,8 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
                 }
             });
 
-            if (rawData.status === 200) {
-                const data = await rawData.json();
-                updateDoctorName((data.firstName || '') + ' ' + (data.lastName || ''));
-            } throw new Error('Slot unavailable exception');
+            if (rawData.status !== 200)
+                throw new Error('Slot unavailable exception');
         } catch (error) {
             console.log(error);
             alert('Either the slot is already booked or not available');
