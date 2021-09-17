@@ -17,7 +17,7 @@ const modalStyle = {
 };
 
 export default function Appointments(props) {
-    const [appointments, updateAppointments] = useState([]);
+    const { appointments, updateAppointments } = props;
     const [ratingModalOpen, updateRatingModalOpen] = useState(false);
     const [appointmentId, updateAppointmentId] = useState('');
     const [doctorId, updateDoctorId] = useState('');
@@ -79,7 +79,7 @@ export default function Appointments(props) {
                         color="primary"
                         onClick={_ => {
                             updateAppointmentId(e.appointmentId);
-                            updateDoctorId(e.doctor_id);
+                            updateDoctorId(e.doctorId);
                             updateRatingModalOpen(true);    
                         }}
                     >
