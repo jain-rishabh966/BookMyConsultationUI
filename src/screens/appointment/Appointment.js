@@ -54,6 +54,7 @@ export default function Appointments(props) {
                 }
             })();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     let html = <h2>Login to see appointments</h2>;
