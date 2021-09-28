@@ -49,7 +49,9 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
 
         try {
             const rawData = await fetch(`/doctors/${id}/timeSlots?date=${
-                ((new Date(selectedDate) || new Date()).toJSON() || '').substr(0, 10)
+                require('moment')(
+                    new Date(selectedDate) || new Date()
+                ).format('YYYY-MM-DD')
             }`, {
                 method: 'GET'
             });
@@ -79,6 +81,8 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
                 return;
             };
             
+            const moment = require('moment');
+
             const rawData = await fetch(`/appointments`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -87,9 +91,9 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
                     "userId": userDetails.id,
                     "userName": userDetails.firstName + ' ' + userDetails.lastName,
                     "userEmailId": userDetails.id,
-                    "timeSlot": new Date(timeSlot).toJSON().substr(0, 10),
+                    "timeSlot": moment(new Date(timeSlot)).format('YYYY-MM-DD'),
                     "appointmentDate": selectedDate,
-                    "createdDate": new Date().toJSON().substr(0, 10),
+                    "createdDate": moment(new Date()).format('YYYY-MM-DD'),
                     "symptoms": symptoms,
                     "priorMedicalHistory": medicalHistory
                 }),
@@ -101,6 +105,10 @@ export default function BookAppointment({ setBookAppointmentModalOpen, doctorId:
 
             if (rawData.status !== 200)
                 throw new Error('Slot unavailable exception');
+            else {
+                alert('The appointment has been booked!');
+                setBookAppointmentModalOpen(false);
+            }
         } catch (error) {
             console.log(error);
             alert('Either the slot is already booked or not available');
