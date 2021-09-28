@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import FormHeader from '../formHeader/FormHeader';
 
 export default function RegisterForm({ setSuccessMessage, activePage, setActivePage, successMessage, deactivateModal }) {
-    const registerHandler = async (firstName, lastName, emailId, password, mobile, dob) => {
+    const registerHandler = async (firstName, lastName, emailId, password, mobile/*, dob */) => {
         try {
             const rawData = await fetch('/users/register', {
                 method: 'POST',
@@ -14,7 +14,7 @@ export default function RegisterForm({ setSuccessMessage, activePage, setActiveP
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    emailId, firstName, lastName, mobile, password, dob,
+                    emailId, firstName, lastName, mobile, password/*, dob,*/
                 })
             });
             const data = await rawData.json();
@@ -32,7 +32,7 @@ export default function RegisterForm({ setSuccessMessage, activePage, setActiveP
     const [firstName, updateFirstName] = useState('');
     const [lastName, updateLastName] = useState('');
     const [email, updateEmail] = useState('');
-    const [dob, updateDob] = useState('');
+    // const [dob, updateDob] = useState('');
     const [password, updatePassword] = useState('');
     const [contactNo, updateContactNo] = useState('');
 
@@ -77,7 +77,7 @@ export default function RegisterForm({ setSuccessMessage, activePage, setActiveP
                     value={password}
                     onChange={e => updatePassword(e.target.value)}
                 />
-                <br />
+                {/* <br />
                 <TextValidator
                     label="Date Of Birth *"
                     name="dob"
@@ -88,7 +88,7 @@ export default function RegisterForm({ setSuccessMessage, activePage, setActiveP
                     InputLabelProps={{ shrink: true }}
                     value={dob}
                     onChange={e => updateDob(e.target.value)}
-                />
+                /> */}
                 <br />
                 <TextValidator
                     label="Mobile No. *"
@@ -103,7 +103,7 @@ export default function RegisterForm({ setSuccessMessage, activePage, setActiveP
                 <div className="message">{successMessage}</div>
                 <br />
                 <div className="nav-buttons">
-                    <Button variant="contained" color="primary" onClick={() => registerHandler(firstName, lastName, email, password, contactNo, dob)}>REGISTER</Button>
+                    <Button variant="contained" color="primary" onClick={() => registerHandler(firstName, lastName, email, password, contactNo/*, dob */)}>REGISTER</Button>
                     <Button variant="contained" color="secondary" onClick={deactivateModal}>CANCEL</Button>
                 </div>
             </ValidatorForm>
