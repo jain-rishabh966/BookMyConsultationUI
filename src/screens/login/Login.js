@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import FormHeader from '../formHeader/FormHeader';
 
 export default function LoginForm({ setUserLoggedIn, updateLoginModal, activePage, setActivePage, setSuccessMessage, deactivateModal }) {
+    /* Handler for login */
     const loginHandler = async (username, password) => {
         try {
             const rawData = await fetch('/auth/login', {

@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import FormHeader from '../formHeader/FormHeader';
 
 export default function RegisterForm({ setSuccessMessage, activePage, setActivePage, successMessage, deactivateModal }) {
+    /* Handler for register */
     const registerHandler = async (firstName, lastName, emailId, password, mobile/*, dob */) => {
         try {
             const rawData = await fetch('/users/register', {

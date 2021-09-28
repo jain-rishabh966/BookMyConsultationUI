@@ -6,9 +6,11 @@ import { Button } from "@material-ui/core";
 import RateAppointmentHeader from "../../common/header/ModalHeader";
 
 export default function RateAppointment({ updateRatingModalOpen, appointmentId, doctorId }) {
+    /* State variables rendering */
     const [comments, updateComments] = useState('');
     const [rating, updateRating] = useState(0);
 
+    /* A handler for submitting ratings */
     async function submitRating(comments, rating, appointmentId, doctorId) {
         try {
             let userDetails = sessionStorage.getItem('user-details');

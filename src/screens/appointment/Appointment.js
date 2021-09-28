@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 
 import RateAppointment from "./RateAppointment";
 
+/* Style for the pop-up Modal */
 const modalStyle = {
     content: {
         top: '50%',
@@ -17,11 +18,13 @@ const modalStyle = {
 };
 
 export default function Appointments(props) {
+    /* State variables rendering */
     const { appointments, updateAppointments } = props;
     const [ratingModalOpen, updateRatingModalOpen] = useState(false);
     const [appointmentId, updateAppointmentId] = useState('');
     const [doctorId, updateDoctorId] = useState('');
 
+    /* Checking if user is logged in if the access token is present */
     const isLoggedIn = () => sessionStorage.getItem('access-token') != null;
 
     useEffect(_ => {

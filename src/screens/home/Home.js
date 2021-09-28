@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home(props) {
+    /* rendering state variables */
     const [userLoggedIn, setUserLoggedIn] = useState(window.sessionStorage.getItem('access-token') !== null);
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
@@ -63,6 +64,7 @@ export default function Home(props) {
         setValue(newValue);
     };
 
+    /* Render the active page */
     let activePageHtml = <Appointments {...props} appointments={appointments} updateAppointments={updateAppointments} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />;
     if (activePage === 'DOCTORS') {
         activePageHtml = <DoctorList {...props} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />

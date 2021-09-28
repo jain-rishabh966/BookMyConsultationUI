@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import DoctorDetails from "./DoctorDetails";
 import BookAppointment from "./BookAppointment";
 
+/* Style for the pop-up Modal */
 const modalStyle = {
     content: {
         top: '50%',
@@ -18,12 +19,14 @@ const modalStyle = {
 };
 
 export default function DoctorList() {
+    /* State variables rendering */
     const [specialities, updateSpecialities] = useState([]);
     const [speciality, updateSpeciality] = useState('');
     const [doctors, updateDoctors] = useState([]);
 
     const [doctorId, updateDoctorId] = useState('');
 
+    /* State variables rendering for modal */
     const [viewDetailsModalOpen, setViewDetailsModalOpen] = useState(false);
     const [bookAppointmentModalOpen, setBookAppointmentModalOpen] = useState(false);
 
@@ -50,6 +53,7 @@ export default function DoctorList() {
         })();
     }, []);
 
+    /* Reload on speciality change and initialization */
     useEffect(_ => {
         // Load doctors
         (async _ => {
